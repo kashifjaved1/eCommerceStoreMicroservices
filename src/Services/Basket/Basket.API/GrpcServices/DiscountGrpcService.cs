@@ -21,16 +21,7 @@ namespace Basket.API.GrpcServices
             {
                 ProductName = productName
             };
-            //return await _discountProtoService.GetDiscountAsync(discountRequest);
-
-            try
-            {
-                return await _discountProtoService.GetDiscountAsync(discountRequest);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            return await _discountProtoService.GetDiscountAsync(discountRequest);
         }
     }
 }
