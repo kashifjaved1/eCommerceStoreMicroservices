@@ -19,7 +19,7 @@ namespace Basket.API.Data.Entities
         public decimal TotalPrice
         {
             get
-            {
+            {   // calculating total price of items accordingly to their quantity.
                 decimal totalprice = 0;
                 foreach (var item in Items)
                 {

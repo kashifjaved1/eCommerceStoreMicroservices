@@ -52,7 +52,7 @@ services:
     container_name: catalog.api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - DbSettings:ConnectionString=mongodb://catalogdb:27017 # here in connectionString the catalogdb is above specified containerName.
+      - DbSettings:ConnectionString=mongodb://catalogdb:27017 # here refered catalogdb in connectionString is actually the above specified containerName.
     depends_on:
       - catalogdb
     ports:

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Threading.Tasks;
 using System;
+using Basket.API.GrpcServices;
 
 namespace Basket.API.Controllers
 {
@@ -13,13 +14,14 @@ namespace Basket.API.Controllers
     public class BasketController : ControllerBase
     {
         private readonly IBasketRepository _repository;
-        //private readonly DiscountGrpcService _discountGrpcService;
+        private readonly DiscountGrpcService _discountGrpcService;
         //private readonly IPublishEndpoint _publishEndpoint;
         //private readonly IMapper _mapper;
 
-        public BasketController(IBasketRepository repository)
+        public BasketController(IBasketRepository repository, DiscountGrpcService discountGrpcService)
         {
             _repository = repository;
+            _discountGrpcService = discountGrpcService;
         }
 
 
@@ -43,14 +45,16 @@ namespace Basket.API.Controllers
         [ProducesResponseType(typeof(ShoppingCart), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<ShoppingCart>> UpdateBasket([FromBody] ShoppingCart basket)
         {
-            // TODO : Communicate with Discount.Grpc
+            // TODO : Communicate with Discount.Grpc (make this project client, and add gRPC server into this
+            // project by using VS feature connectedService / adding connection into this project .csproj file
+            // as client, because in this project we're consuming discount grpc client services.
             // and Calculate latest prices of product into shopping cart
             // consume Discount Grpc
-            //foreach (var item in basket.Items)
-            //{
-            //    var coupon = await _discountGrpcService.GetDiscount(item.ProductName);
-            //    item.Price -= coupon.Amount;
-            //}
+            foreach (var item in basket.Items)
+            {
+                var coupon = await _discountGrpcService.GetDiscount(item.ProductName);
+                item.Price -= coupon.Amount;
+            }
 
             return Ok(await _repository.UpdateBasket(basket));
         }

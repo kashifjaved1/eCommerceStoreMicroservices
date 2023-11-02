@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+option csharp_namespace = "Discount.Grpc.Protos"; // defining namespace for protos.
+
+service DiscountProtoService {
+	// rpc: keyword,
+	// GetDiscount: rpc service name
+	// GetDiscountRequest: input parameter/object
+	// CouponModel: return type/object
+	rpc GetDiscount (GetDiscountRequest) returns (CouponModel);
+
+	rpc CreateDiscount (CreateDiscountRequest) returns (CouponModel);
+	rpc UpdateDiscount (UpdateDiscountRequest) returns (CouponModel);
+	rpc DeleteDiscount (DeleteDiscountRequest) returns (DeleteDiscountResponse);
+}
+
+message GetDiscountRequest {
+	string productName = 1;	
+}
+
+// it'll act as a dto for entity coupon.
+message CouponModel {
+	// in grpc we need need to annotate members with numbers so below 1,2,3,4 are not values to fields, these are just annotations.
+	int32 id = 1;
+	string productName = 2;
+	string description = 3;
+	int32 amount = 4;
+}
+
+message CreateDiscountRequest {
+	CouponModel coupon = 1;
+}
+
+message UpdateDiscountRequest {
+	CouponModel coupon = 1;
+}
+
+message DeleteDiscountRequest {
+	string productName = 1;
+}
+
+message DeleteDiscountResponse {
+	bool success = 1;
+}
