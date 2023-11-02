@@ -31,7 +31,7 @@ namespace Discount.Grpc.Services
             }
             _logger.LogInformation("Discount is retrieved for ProductName : {productName}, Amount : {amount}", coupon.ProductName, coupon.Amount);
 
-            var couponModel = _mapper.Map<CouponModel>(coupon); // mapping / converting coupon of Coupon entity/dto to grpc CouponModel type.
+            var couponModel = _mapper.Map<CouponModel>(coupon); // mapping / converting coupon of Coupon entity to grpc CouponModel (can say dto) type.
             return couponModel;
         }
 

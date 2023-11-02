@@ -14,13 +14,18 @@ namespace Basket.API
         {
             //configuration["some_key"] == configuration.GetValue<string>("some_key");
             //configuration["some:key"] == configuration.GetValue<string>("some:key");
+            
+            // Redis Configuration
             services.AddStackExchangeRedisCache(options =>
             {
                 options.Configuration = configuration.GetValue<string>("CacheSettings:ConnectionString");
             });
 
+            // General Configuration
             services.AddScoped<IBasketRepository, BasketRepository>();
+            //services.AddAutoMapper(typeof(Startup));
 
+            // Grpc Configuration
             services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(
                 options => options.Address = new Uri(configuration["GrpcSettings:DiscountGrpcServerUrl"]) // grpc server url for client to communicate with it.
             );
