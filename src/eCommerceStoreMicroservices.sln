@@ -37,7 +37,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.Messages", "Buildi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiGateways", "ApiGateways", "{FFF61026-F2FD-40B7-857A-4B61BD1D356C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OcelotApiGateway", "ApiGateways\OcelotApiGateway\OcelotApiGateway.csproj", "{2131BBD5-FA8C-4C34-9405-9100D09D1505}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OcelotApiGateway", "ApiGateways\OcelotApiGateway\OcelotApiGateway.csproj", "{2131BBD5-FA8C-4C34-9405-9100D09D1505}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopping.Aggregator", "ApiGateways\Shopping.Aggregator\Shopping.Aggregator.csproj", "{2CF72B9C-6C18-4950-ADB5-316AA81D574E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -89,6 +91,10 @@ Global
 		{2131BBD5-FA8C-4C34-9405-9100D09D1505}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2131BBD5-FA8C-4C34-9405-9100D09D1505}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2131BBD5-FA8C-4C34-9405-9100D09D1505}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CF72B9C-6C18-4950-ADB5-316AA81D574E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CF72B9C-6C18-4950-ADB5-316AA81D574E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CF72B9C-6C18-4950-ADB5-316AA81D574E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CF72B9C-6C18-4950-ADB5-316AA81D574E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -108,6 +114,7 @@ Global
 		{5AF00E1D-F3C6-40AC-9CCC-6A013DAE577B} = {A789B615-CFEA-4B20-AB6B-212CFE552278}
 		{D56E82A5-06B2-45F6-8A28-0E154CE1A78F} = {DD24EA06-F41C-4A99-8BA2-00D4FB5E4299}
 		{2131BBD5-FA8C-4C34-9405-9100D09D1505} = {FFF61026-F2FD-40B7-857A-4B61BD1D356C}
+		{2CF72B9C-6C18-4950-ADB5-316AA81D574E} = {FFF61026-F2FD-40B7-857A-4B61BD1D356C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CB6E1346-D4F3-4E98-9E73-99725B4B82FB}
