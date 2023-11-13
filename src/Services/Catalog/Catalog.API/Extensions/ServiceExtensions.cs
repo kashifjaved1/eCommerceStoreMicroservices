@@ -1,10 +1,10 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Catalog.API.Data;
+using Catalog.API.Repositories;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
-using Ordering.Application;
-using Ordering.Infrastructure;
 
-namespace Ordering.API
+namespace Catalog.API.Extensions
 {
     public static class ServiceExtensions
     {
@@ -13,11 +13,11 @@ namespace Ordering.API
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Ordering.API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Catalog.API", Version = "v1" });
             });
 
-            services.AddApplicationServices();
-            services.AddInfrastructureServices(configuration);
+            services.AddScoped<ICatalogContext, CatalogContext>();
+            services.AddScoped<IProductRepository, ProductRepository>();
         }
     }
 }

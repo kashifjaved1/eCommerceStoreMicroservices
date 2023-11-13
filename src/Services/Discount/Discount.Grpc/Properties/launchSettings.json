@@ -3,7 +3,7 @@
     "Discount.Grpc": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
-      "launchBrowser": false,
+      "launchBrowser": true,
       "applicationUrl": "http://localhost:5003;",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

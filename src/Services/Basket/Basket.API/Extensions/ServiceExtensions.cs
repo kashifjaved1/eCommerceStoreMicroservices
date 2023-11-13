@@ -1,20 +1,22 @@
-﻿using Basket.API.GrpcServices;
-using Basket.API.Repositories;
+﻿using Basket.API.Repositories;
+using Basket.API.Services;
 using Discount.Grpc.Protos;
+using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using System;
 
-namespace Basket.API
+namespace Basket.API.Extensions
 {
     public static class ServiceExtensions
     {
         public static void ProjectSettings(this IServiceCollection services, IConfiguration configuration)
         {
+            // left hand side == right hand side.
             //configuration["some_key"] == configuration.GetValue<string>("some_key");
             //configuration["some:key"] == configuration.GetValue<string>("some:key");
-            
+
             // Redis Configuration
             services.AddStackExchangeRedisCache(options =>
             {
@@ -23,14 +25,24 @@ namespace Basket.API
 
             // General Configuration
             services.AddScoped<IBasketRepository, BasketRepository>();
-            //services.AddAutoMapper(typeof(Startup));
+            services.AddScoped<EventService>();
+            services.AddAutoMapper(typeof(Startup));
 
             // Grpc Configuration
             services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(
                 options => options.Address = new Uri(configuration["GrpcSettings:DiscountGrpcServerUrl"]) // grpc server url for client to communicate with it.
             );
-
             services.AddScoped<DiscountGrpcService>();
+
+            // MassTransit-RabbitMQ Configuration
+            services.AddMassTransit(config =>
+            {
+                config.UsingRabbitMq((ctx, cfg) =>
+                {
+                    cfg.Host(configuration["EventBusSettings:HostAddress"]);
+                });
+            });
+            services.AddMassTransitHostedService();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

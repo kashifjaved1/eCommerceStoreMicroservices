@@ -54,8 +54,12 @@ namespace Ordering.API.Extensions
             IServiceProvider services
         ) where TContext : DbContext
         {
-            context.Database.Migrate();
-            seeder(context, services);
+            var isDbExist = context.Database.EnsureCreated();
+            if( isDbExist )
+            {
+                context.Database.Migrate();
+                seeder(context, services);
+            }
         }
     }
 }
