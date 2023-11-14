@@ -116,8 +116,8 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data
 
-  ocelotapigw:
-    container_name: ocelotapigw
+  ocelotapigateway:
+    container_name: ocelotapigateway
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
     depends_on:
@@ -142,3 +142,17 @@ services:
     ports:
       - "8005:80"
 
+
+  ecommerceui:
+    container_name: ecommerceui
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ApiSettings:GatewayAddress=http://ocelotapigateway"
+    depends_on:
+      - ocelotapigateway
+      - catalog.api
+      - basket.api
+      - discount.api
+      - ordering.api
+    ports:
+      - "8006:80"
