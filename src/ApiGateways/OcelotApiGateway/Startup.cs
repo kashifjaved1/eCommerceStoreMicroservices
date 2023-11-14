@@ -33,6 +33,7 @@ namespace OcelotApiGateway
                 {
                     await context.Response.WriteAsync("Hello World!");
                 });
+                endpoints.MapHealthChecks("/health/api-gateway");
             });
 
             await app.UseOcelot();

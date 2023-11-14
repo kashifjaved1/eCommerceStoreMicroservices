@@ -1,4 +1,5 @@
-﻿using Discount.API.Repositories;
+﻿using Discount.API.Health;
+using Discount.API.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
@@ -10,6 +11,15 @@ namespace Discount.API.Extensions
         public static void ProjectSettings(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<IDiscountRepository, DiscountRepository>();
+
+            // Health Checks Configuration
+            services
+                .AddHealthChecks()
+                .AddCheck<NpgSqlHealthCheck>("PostgreHealthCheck");
+            // OR
+            //services
+            //    .AddHealthChecks()
+            //    .AddNpgSql(configuration.GetConnectionString("ConnectionString"));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

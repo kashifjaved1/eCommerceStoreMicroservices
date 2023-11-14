@@ -12,7 +12,9 @@ namespace OcelotApiGateway.Extensions
             services
                 .AddOcelot()
                 .AddCacheManager(settings => settings.WithDictionaryHandle());
-
+            
+            // Health Checks Configurarion
+            services.AddHealthChecks();
         }
     }
 }
